@@ -14,7 +14,7 @@ zinit light zsh-users/zsh-completions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light Aloxaf/fzf-tab
 
-zinit snippet OMZP::git
+#zinit snippet OMZP::git
 zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
@@ -58,10 +58,9 @@ eval "$(direnv hook zsh)"
 
 
 alias ls="ls --color"
-alias cdd="cd ~/code/github.com/lablabs/"
+alias cdl="cd ~/code/github.com/lablabs/"
 alias cdt="cd ~/code/github.com/lablabs/tf-infra"
 alias cdo="cd ~/code/github.com/lablabs/tf-org"
-alias t="terraform"
 
 # TF
 function tfplan () {
@@ -70,6 +69,11 @@ function tfplan () {
   terraform show -json $TF_PLAN_DIR/tfplan > $TF_PLAN_DIR/tfplan.json;
   tf-summarize $TF_PLAN_DIR/tfplan.json;
 }
+
+alias tf="terraform"
+alias tfi="terraform init"
+alias tfa="terraform apply"
+alias tfap="terraform apply --auto-approve"
 
 # Git
 alias ga="git add"
@@ -81,3 +85,14 @@ alias gca="git commit -aSm"
 alias gp="git push origin"
 alias gbc="git checkout -b"
 alias gb="git branch"
+
+export AWS_CONFIG_FILE=~/.aws/config
+
+# Argo
+alias arglog="argocd login --sso --grpc-web"
+alias argapp="argocd app list"
+alias argget="argocd app get"
+alias argappsyn="argocd app sync --prune"
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh) # add autocomplete permanently t
+
+
