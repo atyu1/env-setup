@@ -9,5 +9,6 @@ ghostty, wizz and more
   - tmux source ~/.tmux.conf
   - Inside tmux -> ctrl-s + I
 - neovim
+- nvchad - git clone
 - zoxide
 - fzf
