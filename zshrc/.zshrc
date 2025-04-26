@@ -1,3 +1,5 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -14,11 +16,18 @@ zinit light zsh-users/zsh-completions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light Aloxaf/fzf-tab
 
-#zinit snippet OMZP::git
+zinit snippet OMZL::git.zsh
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
 zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
+
+autoload -Uz compinit && compinit
+
+zinit cdreplay -g
 
 bindkey -e
 bindkey '^p' history-search-backward
@@ -40,12 +49,10 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 eval "$(fzf --zsh)"
-
-autoload -Uz compinit && compinit
-
-zinit cdreplay -g
+eval "$(zoxide init --cmd cd zsh)"
 
 export GPG_TTY=$(tty)
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
@@ -95,4 +102,6 @@ alias argget="argocd app get"
 alias argappsyn="argocd app sync --prune"
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh) # add autocomplete permanently t
 
-
+# Go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
