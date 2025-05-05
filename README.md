@@ -12,3 +12,4 @@ ghostty, wizz and more
 - nvchad - git clone
 - zoxide
 - fzf
+- bat

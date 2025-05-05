@@ -105,3 +105,10 @@ alias argappsyn="argocd app sync --prune"
 # Go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
+
+# NeoVIM
+alias vim="nvim"
+
+# Other
+alias python="/usr/bin/python3"
+alias cat="bat"
